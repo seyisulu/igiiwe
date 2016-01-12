@@ -1,0 +1,30 @@
+<ion-view view-title="{{book.title}}">
+  <ion-content class="scroll-bg">
+    <ion-item>
+        <div class="list card" on-swipe-right="onSwipeRight()">
+          
+          <div class="item item-image">
+            <img src="library/image/{{book.image}}">
+          </div>
+          
+          <div class="item item-body item-stable">
+            <h2>{{book.title}}</h2>
+            <p style="text-transform: sentence-case;">
+                By {{book.author}}
+            </p>
+          </div>
+          
+          <div class="item item-body">
+            <p>
+              {{book.description}}
+            </p>
+          </div>
+
+          <a class="item item-icon-right royal" ui-sref="app.read({bookId: book.id})">
+            <i class="icon ion-chevron-right"></i>
+            Read Book
+          </a>
+        </div>
+      </ion-item>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,19 @@
+<ion-view view-title="Library">
+  <ion-content class="scroll-bg">
+    <label class="item item-input">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="search" placeholder="Search" ng-model="searcher.title">
+    </label>
+    <ion-list>
+      <ion-item collection-repeat="book in library | filter:searcher" ui-sref="app.book({bookId: book.id})" class="item item-text-wrap royal item-icon item-icon-left">
+          <i class="icon icon-royal ion-ios-book"></i>
+          <h2>{{ book.title }}</h2>
+          <p class="item-royal">By {{ book.author }}</p>
+          <ion-option-button class="button-royal" ui-sref="app.read({bookId: book.id})"><i class="icon ion-eye"></i></ion-option-button>
+          <!-- Show if book isn't downloaded yet
+          <ion-option-button class="button-royal" ui-sref="app.down({bookId: book.id})"><i class="icon ion-ios-download"></i></ion-option-button>
+          -->
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,31 @@
+<ion-modal-view>
+  <ion-content class="scroll-bg" scroll="false">
+    <section class="login-container">
+      <div class = "col header text-center">
+          <img src="img/splash.png" class="logo" style="max-width:90%;"/>
+      </div>
+      <div class = "col form-row">
+        <div>
+          <form ng-submit="doLogin()">
+            <div class="list list-inset list-trns">
+              <label class="item item-input">
+                <i class="icon ion-person placeholder-icon icon-royal"></i>
+                <input type="email" placeholder="ogbeni@igiiwe.com" ng-model="loginData.username">
+              </label>
+              <label class="item item-input">
+                <i class="icon ion-locked placeholder-icon"></i>
+                <input type="password" placeholder="password" ng-model="loginData.password">
+              </label>
+              <label class="item item-trns">
+                <button class="button button-block button-royal" type="submit">Log in</button>
+              </label>
+            </div>
+          </form>  
+        </div>
+      </div>
+      <div class = "col text-center">
+          Don't have an account? <strong><a href = "http://igiiwe.com/">Create one!</a></strong>
+      </div>          
+    </section>
+  </ion-content>
+</ion-modal-view>
