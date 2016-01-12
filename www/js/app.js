@@ -82,6 +82,20 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.services'])
         }
       }
     })
+    .state('app.reader', {
+      url: '/reader/:bookId',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/reader.html',
+          controller: 'ReaderCtrl',
+          resolve: {
+            book: function(LibraryService, $stateParams) {
+                return LibraryService.getBook($stateParams.bookId);
+            }
+          }
+        }
+      }
+    })
     .state('app.settings', {
       url: '/settings',
       views: {

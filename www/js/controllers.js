@@ -69,32 +69,25 @@ angular.module('app.controllers', [])
   $scope.bookNext = function () { $scope.Book.nextPage(); console.log('Next'); };
   $scope.bookPrev = function () { $scope.Book.prevPage(); console.log('Prev'); };
   
-  EPUBJS.cssPath = "library/reader/css/";
   EPUBJS.Render.Iframe.prototype.setLeft = function(leftPos){
     this.docEl.style["-webkit-transform"] = 'translate('+ (-leftPos) + 'px, 0)';
   };
   
   FileSysService.checkFile($scope.ddir, book.file).then(function (result) {
-    //console.log('Check File:');
-    //console.table(result);
     $scope.data = result;
     $scope.data.file(function (file) {
       $scope.reader = new FileReader();
       $scope.reader.onloadend = function (evt) {
-        //result property is string type if you read data as string.
-        //If you read data as array buffer then its assigned to a array buffer object.
-        //console.dir(evt.target.result);
         $scope.Book = ePub(evt.target.result, {
             version: 4,
             restore: false, // Skips parsing epub contents, loading from localstorage instead
             storage: 'ram', // true (auto) or false (none) | override: 'ram', 'websqldatabase', 'indexeddb', 'filesystem'
             spreads: false, // Displays two columns
             fixedLayout: false, //-- Will turn off pagination
-            styles: {}, // Styles to be applied to epub
+            styles: { }, // Styles to be applied to epub
             width: parseInt(window.getComputedStyle(document.getElementById('area')).width),
             height: parseInt(window.getComputedStyle(document.getElementById('area')).height)
         });
-        
         $scope.Book.renderTo('area');
       };
       $scope.reader.readAsArrayBuffer(file);

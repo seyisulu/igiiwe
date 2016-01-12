@@ -6,6 +6,19 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     
     <title>Igiiwe Reader</title>
+    <!-- ReaderCtrl -->
+    <style type="text/css">
+      @font-face {
+        font-family: 'fontello';
+        src: url('library/reader/font/fontello.eot?60518104');
+        src: url('library/reader/font/fontello.eot?60518104#iefix') format('embedded-opentype'),
+             url('library/reader/font/fontello.woff?60518104') format('woff'),
+             url('library/reader/font/fontello.ttf?60518104') format('truetype'),
+             url('library/reader/font/fontello.svg?60518104#fontello') format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
 
     <link href="css/ionic.app.css" rel="stylesheet">
 
@@ -15,7 +28,7 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
     
-    <!-- EPUB's js -->
+    <!-- ReadCtrl EPUB's js -->
     <script src="library/localforage/localforage.js"></script>
     <script src="library/epub/libs/zip.min.js"></script>
     <script src="library/epub/epub.js"></script>
@@ -24,11 +37,25 @@
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+
     <script>
       EPUBJS.Render.Iframe.prototype.setLeft = function(leftPos){
         this.document.documentElement.style.WebkitTransform = 'translate("-" + leftPos +"px", 0)';
       };
+      // iframe.js
+      EPUBJS.Render.Iframe.prototype.resized = function(e){
+        // Get the fractional height and width of the iframe
+        this.width = parseInt(window.getComputedStyle(document.getElementById('book-reader')).width);
+        this.height = parseInt(window.getComputedStyle(document.getElementById('book-reader')).height);
+      };
+      // renderer.js
+      EPUBJS.Renderer.prototype.onResized = function(e) {
+        var width = parseInt(window.getComputedStyle(document.getElementById('book-reader')).width),
+            height = parseInt(window.getComputedStyle(document.getElementById('book-reader')).height);
+        this.resize(width, height, false);
+      };
     </script>
+
   </head>
 
   <body ng-app="app">
